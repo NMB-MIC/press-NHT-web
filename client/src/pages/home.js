@@ -20,7 +20,7 @@ export default class Home extends Component {
     //   const datas = res.data;
     //   this.setState({ machine: datas });
     // });
-    this.subscribeMessage();
+    // this.subscribeMessage();
   }
 
   handleKeyPress = async (e) => {
@@ -176,33 +176,33 @@ export default class Home extends Component {
     });
   };
 
-  subscribeMessage = async () => {
-    // console.log("TEST")
-    // const topic = 'test'; // Replace with your MQTT topic
-    // const message = 'Hello, MQTT!';
-    let client = mqtt.connect(mqttURL);
-    client.on("connect", () => {
-      console.log("connected");
-      client.subscribe("A01/material");
-    });
-    client.on("message", (topic, message) => {
-      console.log(message.toString())
-      httpClient
-        .post(apiUrl + "updateStatus", {
-          status: message.toString(),
-          serial_no: this.state.serial_no_check,
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+  // subscribeMessage = async () => {
+  //   // console.log("TEST")
+  //   // const topic = 'test'; // Replace with your MQTT topic
+  //   // const message = 'Hello, MQTT!';
+  //   let client = mqtt.connect(mqttURL);
+  //   client.on("connect", () => {
+  //     console.log("connected");
+  //     client.subscribe("A01/material");
+  //   });
+  //   client.on("message", (topic, message) => {
+  //     console.log(message.toString())
+  //     httpClient
+  //       .post(apiUrl + "updateStatus", {
+  //         status: message.toString(),
+  //         serial_no: this.state.serial_no_check,
+  //       })
+  //       .catch((error) => {
+  //         console.log(error);
+  //       });
 
-      //console.log(message.toString())
-      // if(topic === "test2"){
-      //     console.log(message.toString())
-      //     this.setState({msg2 : message.toString()})
-      // }
-    });
-  };
+  //     //console.log(message.toString())
+  //     // if(topic === "test2"){
+  //     //     console.log(message.toString())
+  //     //     this.setState({msg2 : message.toString()})
+  //     // }
+  //   });
+  // };
 
   render() {
     const { machine } = this.state;
